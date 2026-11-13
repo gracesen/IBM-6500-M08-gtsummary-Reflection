@@ -1,0 +1,325 @@
+---
+title: "Summary Tables with {gtsummary}"
+subtitle: "M08 Reflection and Privacy-Safe Application"
+author: "Grace Sen"
+institute: "IBM 6500, Cal Poly Pomona"
+date: "2026-11-12"
+output-file: index.html
+format:
+  revealjs:
+    theme: serif
+    width: 1600
+    height: 900
+    footer: "M08 Reflection | Grace Sen"
+    transition: slide
+    transition-speed: default
+    incremental: false
+    toc: true
+    toc-depth: 1
+    slide-number: true
+    scrollable: true
+    smaller: true
+    code-fold: false
+    code-overflow: wrap
+    number-sections: false
+    number-depth: 5
+    embed-resources: true
+    self-contained: true
+    css: gtsummary-styles.css
+editor: visual
+execute:
+  echo: true
+  freeze: auto
+---
+
+# Reflection Overview
+
+## What This Report Covers
+
+::: incremental
+- The main capabilities of `{gtsummary}`
+- The difference between `{gtsummary}`, `{gt}`, and `{gtExtras}`
+- Three ideas from Daniel D. Sjoberg's presentation
+- A privacy-safe plan for cross-tabulation and regression
+- Lessons about reproducibility and responsible data use
+:::
+
+::: notes
+This presentation reflects on the module while also explaining why the confidential CEP dataset is not included in a public report.
+:::
+
+# Prompt 1: Package Capabilities
+
+## Prompt 1
+
+> **In Step 1, you have seen how to create a summary table and modify it for various statistical analyses. Summarize the package's capabilities as explained by the speaker. How may the `{gtsummary}` package benefit you for your school work or career?**
+
+The main purpose of `{gtsummary}` is to turn data and statistical models into clear, professional tables with relatively little code. It helps connect the analysis stage with the communication stage, so the final table can be reproduced whenever the data or model changes.
+
+::: aside
+The package uses sensible defaults, but the analyst is still responsible for choosing suitable variables, tests, and interpretations.
+:::
+
+## Main Capabilities of `{gtsummary}`
+
+::::::: columns
+:::: {.column width="50%"}
+### Summarize and compare
+
+::: incremental
+- `tbl_summary()` summarizes continuous and categorical variables.
+- The `by` argument compares groups.
+- `add_p()` adds an appropriate hypothesis test.
+- `add_difference()` reports estimated group differences.
+- `tbl_cross()` creates a cross-tabulation.
+:::
+::::
+
+:::: {.column width="50%"}
+### Model and present
+
+::: incremental
+- `tbl_regression()` formats model estimates.
+- Logistic models can display odds ratios.
+- OLS models can display coefficients and confidence intervals.
+- Survey summaries can account for complex designs.
+- Tables can be stacked, merged, themed, and exported.
+:::
+::::
+:::::::
+
+::: notes
+The lecture moved from descriptive tables to tests of differences, survey data, and regression models. This makes the package useful across an entire analysis workflow.
+:::
+
+## Why the Package Is Useful
+
+::: fragment
+**For school work:** I can create consistent tables for research reports, CEP presentations, and Quarto documents without manually transferring results from statistical output.
+:::
+
+::: fragment
+**For a future career:** I can update the analysis and regenerate the table from the same code. This reduces copying errors and makes my work easier for teammates or clients to review.
+:::
+
+::: fragment
+**Most important benefit:** The code, statistical result, and formatted table stay connected. This supports reproducible analysis instead of editing numbers by hand.
+:::
+
+The package is especially helpful when the audience needs a polished summary rather than raw R output. Its defaults also give me a strong starting point while still allowing labels, statistics, tests, digits, and styling to be customized.
+
+# Prompt 2: Comparing Table Packages
+
+## Prompt 2
+
+> **In Step 2, you watched the extended presentation of the `{gtsummary}` package by Dr. Daniel D. Sjoberg, the creator of the package. How does it differ from `{gt}` and `{gtExtras}`? Give three things you learned newly that were not explained in the lecture in Step 1.**
+
+Daniel D. Sjoberg explained that `{gtsummary}` was designed to make analytical reporting more reproducible. Instead of manually assembling results, the package summarizes the data or model and creates an organized table object that can still be customized.
+
+## `{gtsummary}` vs. `{gt}` vs. `{gtExtras}`
+
+| Package | Main role | Typical use |
+|----|----|----|
+| `{gtsummary}` | Calculates and organizes statistical summaries | Descriptive tables, cross-tabs, tests, regression, and survey results |
+| `{gt}` | Builds and formats display tables | Headers, footnotes, number formats, colors, alignment, and export |
+| `{gtExtras}` | Adds helpers to existing `{gt}` tables | Extra themes, highlighting, images, small plots, and visual enhancements |
+
+`{gtsummary}` focuses on the **analytical content**, while `{gt}` focuses more on the **final table structure and appearance**. `{gtExtras}` extends `{gt}` with additional presentation tools. A `{gtsummary}` table can be converted with `as_gt()` when more detailed formatting is needed.
+
+::: notes
+These packages complement one another. They are not three competing versions of the same tool.
+:::
+
+## Three New Ideas from Step 2
+
+::: incremental
+1.  **Statistics can be reported inline.** A value stored in a table can be inserted directly into the written report, keeping the narrative synchronized with the analysis.
+
+2.  **A `{gtsummary}` object has an internal structure.** The `table_body` stores the displayed analysis rows, while table-styling information controls headers, formatting, and visibility. Functions such as `modify_table_body()` allow deeper customization.
+
+3.  **The final display engine can change.** The same analytical table can be printed through engines such as `{gt}` or other supported formats. This separates the statistical summary from the final rendering method.
+:::
+
+## Why These Ideas Matter
+
+::::: columns
+::: {.column width="48%"}
+### Reproducible writing
+
+Inline reporting means that a revised dataset can update both the table and the number discussed in the paragraph. This is safer than typing a result manually.
+:::
+
+::: {.column width="48%"}
+### Flexible communication
+
+Understanding the table object and output engine makes it possible to create a simple result quickly, then customize it for a thesis, presentation, client report, or publication.
+:::
+:::::
+
+The presentation made me see `{gtsummary}` as more than a shortcut for attractive tables. It is a reproducible reporting system that connects analysis, explanation, and presentation.
+
+# Prompt 3: Cross-Tabulation
+
+## Prompt 3
+
+> **Apply what you learned to your MSDM CEP data. Choose two appropriate variables for cross-tabulation and show if the two variables are associated or not. Use appropriate statistics to test if the two variables are associated. Code, produce the table, and interpret the result.**
+
+### Confidentiality disclosure
+
+The CEP dataset is protected by a nondisclosure agreement. Because this HTML report is intended for public GitHub Pages, the raw data, confidential variable details, output counts, and statistical results are intentionally not displayed.
+
+No association result is claimed in this report because the analysis was not performed with publishable data. Inventing a result would be less appropriate than clearly documenting the limitation.
+
+## Privacy-Safe Cross-Tabulation Template
+
+The following template can be run locally after the variables and disclosure rules are approved. The placeholder names do not reveal the confidential dataset.
+
+``` r
+library(tidyverse)
+library(gtsummary)
+
+# Confidential data must remain in approved local storage.
+cep_private <- readr::read_csv("PRIVATE_DATA_NOT_FOR_GITHUB.csv")
+
+cross_table <- cep_private |>
+  select(category_a, category_b) |>
+  filter(!is.na(category_a), !is.na(category_b)) |>
+  tbl_cross(
+    row = category_a,
+    col = category_b,
+    percent = "row",
+    missing = "no"
+  ) |>
+  add_p(test = everything() ~ "chisq.test") |>
+  bold_labels() |>
+  modify_caption("**Cross-tabulation of Approved CEP Variables**")
+
+cross_table
+```
+
+::: notes
+Before using chi-square, expected cell counts should be checked. Fisher's exact test or combined categories may be more appropriate when counts are too small.
+:::
+
+## How the Result Would Be Interpreted
+
+::: incremental
+- **Null hypothesis:** The two categorical variables are independent.
+- **Alternative hypothesis:** The variables are associated.
+- If *p* \< .05, reject the null hypothesis and report evidence of an association.
+- If *p* ≥ .05, do not reject the null hypothesis; the sample does not provide sufficient evidence of an association.
+- The conclusion should also discuss the row percentages and practical meaning, not only the p-value.
+:::
+
+``` r
+# Optional local diagnostic; do not publish confidential cells.
+chi_result <- chisq.test(
+  table(cep_private$category_a, cep_private$category_b)
+)
+
+chi_result$expected
+```
+
+# Prompt 4: Multiple Regression
+
+## Prompt 4
+
+> **Using the MSDM CEP data, run multiple regression. The dependent variable can be continuous or dichotomous. Regress a dependent variable on a set of independent variables. Code, produce the table, and interpret the result.**
+
+### Confidentiality disclosure
+
+The regression is not estimated or reported here because the NDA has not been confirmed to allow public release of model coefficients, sample sizes, or variable relationships. Even without raw rows, detailed model output may disclose confidential business information.
+
+The code below documents the intended method without presenting invented or unauthorized findings.
+
+## Privacy-Safe OLS Regression Template
+
+``` r
+library(gtsummary)
+
+# Example structure only; use approved variables locally.
+model_ols <- lm(
+  continuous_outcome ~ predictor_a + predictor_b + predictor_c,
+  data = cep_private
+)
+
+regression_table <- model_ols |>
+  tbl_regression(
+    intercept = TRUE,
+    estimate_fun = label_style_sigfig(digits = 3)
+  ) |>
+  add_global_p() |>
+  bold_p(t = 0.05) |>
+  modify_caption("**Multiple Regression with Approved CEP Variables**")
+
+regression_table
+```
+
+For a dichotomous outcome, the model could instead use `glm(..., family = binomial)` and `tbl_regression(exponentiate = TRUE)` to report odds ratios.
+
+## How the Regression Would Be Interpreted
+
+::: incremental
+- The coefficient shows the expected change in the outcome for a one-unit increase in a predictor, holding the other predictors constant.
+- A confidence interval communicates the precision of the estimate.
+- The p-value evaluates evidence that the coefficient differs from zero.
+- Model fit, assumptions, missing values, and possible multicollinearity must also be checked.
+- Statistical significance does not automatically mean practical importance or causation.
+:::
+
+``` r
+# Local diagnostic examples
+summary(model_ols)
+plot(model_ols)
+car::vif(model_ols)
+```
+
+# Overall Reflection
+
+## What I Learned
+
+::: incremental
+- `{gtsummary}` can reduce repetitive formatting work.
+- Good defaults are useful, but they do not replace statistical judgment.
+- Tables should be designed for the audience, not copied directly from raw output.
+- Reproducible code reduces manual mistakes and makes revisions easier.
+- Responsible analysis also includes knowing when a result should **not** be published.
+:::
+
+This module strengthened both my technical and professional understanding. A polished table is valuable only when the analysis is appropriate, the interpretation is honest, and the data are handled according to their confidentiality requirements.
+
+# References
+
+## References and Learning Materials
+
+- Jung, J. **Summarizing Modeling Outputs in Publishable Tables `{gtsummary}`.** [Lecture notes](https://jaejungca.github.io/gtsummary/M08-Customizable%20Tables-gtsummary.html)
+- Sjoberg, D. D. **Presentation-ready Summary Tables with `{gtsummary}`.** [Video](https://www.youtube.com/watch?v=tANo9E1SYJE)
+- Sjoberg, D. D., et al. (2021). **Reproducible Summary Tables with the gtsummary Package.** [The R Journal](https://journal.r-project.org/articles/RJ-2021-053/)
+- `{gtsummary}` documentation. [Presentation-Ready Data Summary and Analytic Result Tables](https://www.danieldsjoberg.com/gtsummary/)
+- Posit. [`{gt}` documentation](https://gt.rstudio.com/)
+- Mock, T. [`{gtExtras}` documentation](https://jthomasmock.github.io/gtExtras/)
+- National Institute of Standards and Technology. **De-Identifying Government Datasets: Techniques and Governance.** [NIST SP 800-188](https://csrc.nist.gov/pubs/sp/800/188/final)
+
+# Appendix
+
+## Appendix: Project Links
+
+- **GitHub Repository:** [IBM-6500-M08-gtsummary-Reflection](https://github.com/gracesen/IBM-6500-M08-gtsummary-Reflection)
+- **Published GitHub Page:** [M08 gtsummary Reflection](https://gracesen.github.io/IBM-6500-M08-gtsummary-Reflection/)
+
+### Files intended for the public repository
+
+- `index.html`
+- `Grace-Sen-M08-Reflection-gtsummary.qmd`
+- `gtsummary-styles.css`
+
+### Files intentionally excluded
+
+- Raw CEP data
+- Confidential extracts or screenshots
+- Client-identifying information
+- Unapproved statistical output
+
+::: notes
+The public repository contains the report and code template only. The confidential dataset should never be added to the repository.
+:::
